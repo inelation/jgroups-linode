@@ -25,7 +25,7 @@ public class LinodePing extends Discovery {
 	@Property(description = "Linode API KEY")
 	private String linode_api_key;
 	@Property(description = "The port number for each node for membership. Default port is 7800")
-	private String port_number;
+	private int port_number;
 	
 	
 	 static {
@@ -52,7 +52,7 @@ public class LinodePing extends Discovery {
 				for (int j=0; j < ipArray.length(); j++) {
 					ipObj = ipArray.getJSONObject(j);
 					if (ipObj.getInt("ISPUBLIC") == 0) {
-						clusterMembers.add(new IpAddress(ipObj.getString("IPADDRESS"), 7800));
+						clusterMembers.add(new IpAddress(ipObj.getString("IPADDRESS"), port_number));
 					}
 					
 				}
